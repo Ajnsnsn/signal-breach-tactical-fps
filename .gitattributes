@@ -1,0 +1,5 @@
+* text=auto eol=lf
+vendor/makefun-threejs.ts -text
+vendor/LICENSE -text
+game/vendor/three/** -text
+screenshots/** binary

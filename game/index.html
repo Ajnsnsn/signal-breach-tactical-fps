@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Signal Breach — Pelagic Relay</title>
+<link rel="stylesheet" href="./style.css">
+<script type="importmap">{"imports":{"three":"./vendor/three/three.module.min.js"}}</script></head>
+<body>
+<canvas id="game" aria-label="Signal Breach first person tactical shooter"></canvas>
+<div id="vignette"></div><div id="damage"></div>
+<div id="hud" class="hidden">
+ <header><div class="brand">SB<span>PE L A G I C &nbsp; / &nbsp; 07</span></div><div class="scoreboard"><div><small>RAIDERS</small><b id="scoreA">0</b><span id="aliveA">● ● ●</span></div><div class="roundbox"><small id="round">ROUND 01</small><strong id="timer">1:35</strong><span id="phase">DEPLOYMENT</span></div><div><small>CUSTODIANS</small><b id="scoreB">0</b><span id="aliveB">● ● ●</span></div></div><div class="session">FIRST TO 5<span>OFFLINE / 3 V 3</span></div></header>
+ <aside class="radar"><canvas id="radar" width="180" height="180"></canvas><span>PELAGIC RELAY <b>N ↑</b></span></aside>
+ <div id="feed"></div><div id="notice"></div>
+ <div id="objective"><span id="role">RAIDER</span><b id="mission">BREACH EITHER RELAY</b><small id="missionSub">Carry the charge to A or B</small></div>
+ <div id="crosshair"><i></i><i></i><i></i><i></i></div><div id="hitmarker">×</div>
+ <div id="interaction"><b id="interactText"></b><div><i id="progress"></i></div></div>
+ <div id="result"><span id="resultTag"></span><h2 id="resultTitle"></h2><p id="resultSub"></p></div>
+ <footer><div class="vitals"><small>VITALS</small><strong><span id="health">100</span><em>HP</em></strong><div class="hpbar"><i id="healthbar"></i></div><span id="armor">◇ 0 ARMOR</span></div><div class="utility"><b id="money">2,600</b><span>CREDITS &nbsp; / &nbsp; B REQUISITION</span><small id="grenades">G / 1 FRAG</small></div><div class="ammo"><small id="weapon">KESTREL / 9</small><strong><span id="ammo">12</span><em id="reserve">/ 60</em></strong><span id="reload">READY</span></div></footer>
+ <div class="controlbar">WASD MOVE <i>·</i> SHIFT SILENT <i>·</i> CTRL CROUCH <i>·</i> RMB FOCUS <i>·</i> R RELOAD <i>·</i> E INTERACT <i>·</i> ESC PAUSE</div>
+</div>
+<main id="menu">
+ <div class="menuPanel"><div class="eyebrow"><i></i> A TACTICAL RELAY OPERATION</div><h1>SIGNAL<br><span>BREACH</span><sup>07</sup></h1><p class="intro">The coast has gone quiet.<br>Take the relay. Hold the frequency.</p><div class="ruleline"><span>3 V 3</span><span>TWO RELAY SITES</span><span>FIRST TO 5</span></div><button id="start" class="primary">BEGIN OPERATION <span>↗</span></button><p class="hint">Mouse + keyboard · Headphones recommended</p><details><summary>FIELD MANUAL</summary><p>Raiders: carry the charge to A or B, then hold E for 3 seconds. Custodians: protect both sites; hold E for 5 seconds to defuse. A planted charge detonates after 35 seconds. Teams swap every 3 rounds. Stop before firing; crouch and focus for precise headshots.</p><p>WASD move · mouse aim · left click fire · right click focus · Shift walk silently · Ctrl crouch · R reload · G frag · 1 primary / 2 sidearm · B buy · Enter deploy · M mute · Esc pause.</p></details></div>
+ <div class="mapcaption"><b>PELAGIC RELAY</b><span>35° N / OFFSHORE TRANSFER STATION</span><p>Original world. Every angle matters.</p></div>
+</main>
+<div id="pause" class="overlay hidden"><div class="panel"><span class="eyebrow">OPERATION PAUSED</span><h2>HOLD YOUR<br>FREQUENCY.</h2><p>Your round waits while the mouse is released.</p><button id="resume" class="primary">RESUME OPERATION ↗</button><button id="drag" style="width:100%;font-size:10px;margin-bottom:14px">PLAY WITH DRAG LOOK / RIGHT MOUSE</button><div class="row"><button id="mute">AUDIO ON</button><button id="restart">RESTART MATCH</button></div><p class="hint">WASD move · Mouse aim/fire · R reload · G frag<br>Shift silent · Ctrl crouch · E plant/defuse · B buy</p><label>SENSITIVITY <input id="sensitivity" type="range" min="1" max="10" value="4"></label></div></div>
+<div id="buy" class="overlay hidden"><div class="shop"><span class="eyebrow">FIELD REQUISITION / <b id="shopCash">2600 CREDITS</b></span><h2>CHOOSE YOUR EDGE.</h2><p>Equipment lasts until you fall. Every operative carries a Kestrel sidearm.</p><div class="items">
+ <button data-buy="smg"><small>01 / CLOSE QUARTERS</small><b>TIDE / 24</b><span>24 rounds · Fast handling</span><em>1,000 CR</em></button>
+ <button data-buy="rifle"><small>02 / ALL PURPOSE</small><b>OSPREY / 30</b><span>30 rounds · Controlled bursts</span><em>1,600 CR</em></button>
+ <button data-buy="marksman"><small>03 / LONG SIGHTLINES</small><b>MERIDIAN / 8</b><span>8 rounds · High precision</span><em>2,200 CR</em></button>
+ <button data-buy="armor"><small>04 / PROTECTION</small><b>COMPOSITE VEST</b><span>100 armor · Absorbs 35% damage</span><em>650 CR</em></button>
+ <button data-buy="grenade"><small>05 / AREA DENIAL</small><b>FRAG CHARGE</b><span>1.8s fuse · 7m blast · Max 2</span><em>300 CR</em></button>
+</div><div class="row"><p id="purchaseNote">You have one frag charge for this operation.</p><button id="deploy" class="primary">DEPLOY / ENTER ↗</button></div></div></div>
+<div id="match" class="overlay hidden"><div class="panel"><span class="eyebrow">OPERATION COMPLETE</span><h2 id="matchTitle">FREQUENCY<br>SECURED.</h2><p id="matchSummary"></p><button id="again" class="primary">NEW OPERATION ↗</button></div></div>
+<div id="error" class="hidden"></div>
+<script type="module" src="./src/main.js"></script>
+</body></html>
+
